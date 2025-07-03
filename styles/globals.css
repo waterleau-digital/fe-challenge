@@ -101,6 +101,8 @@
   /* Borders and Inputs */
   --color-border: var(--neutral-border-primary);
   --color-input: var(--neutral-bg-primary);
+  --color-input-border: var(--neutral-border-secondary);
+  --color-input-background: var(--neutral-bg-primary);
   --color-ring: var(--neutral-border-focus);
   
   /* Semantic Color Mapping */
@@ -461,6 +463,46 @@
     font-weight: var(--font-weight-regular);
     line-height: 1.5;
     transition: all var(--transition-fast);
+  }
+
+  /* Date Input Specific Styling */
+  input[type="date"] {
+    position: relative;
+    width: 100%;
+    padding-right: 2.5rem;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity var(--transition-fast);
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+
+  /* Firefox date input styling */
+  input[type="date"]::-moz-calendar-picker-indicator {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity var(--transition-fast);
+  }
+
+  input[type="date"]::-moz-calendar-picker-indicator:hover {
+    opacity: 1;
   }
 }
 

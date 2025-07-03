@@ -146,7 +146,7 @@ export function InventoryTable({ records, onEdit, onDelete, onApprove }: Invento
       <div className="rounded-md border-0 overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow className="bg-muted/50 hover:bg-muted/70 border-border/50">
+            <TableRow className="bg-muted hover:bg-accent border-border">
               <TableHead className="text-muted-foreground font-medium h-12 px-6">
                 <SortButton field="date">Date</SortButton>
               </TableHead>

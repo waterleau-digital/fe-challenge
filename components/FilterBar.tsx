@@ -123,7 +123,7 @@ export function FilterBar({
                 >
                   <SelectValue placeholder="All categories" />
                 </SelectTrigger>
-                <SelectContent className="bg-popover/95 backdrop-blur-lg border-border/50 elevation-3">
+                <SelectContent className="bg-popover border-border elevation-3">
                   <SelectItem value="all" className="hover:bg-accent/50 transition-brand">
                     All categories
                   </SelectItem>
@@ -202,7 +202,7 @@ export function FilterBar({
                 >
                   <SelectValue placeholder="All statuses" />
                 </SelectTrigger>
-                <SelectContent className="bg-popover/95 backdrop-blur-lg border-border/50 elevation-3">
+                <SelectContent className="bg-popover border-border elevation-3">
                   <SelectItem value="all" className="hover:bg-accent/50 transition-brand">
                     All statuses
                   </SelectItem>
