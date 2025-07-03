@@ -1,0 +1,440 @@
+{
+  "figmaComponentSpecifications": {
+    "metadata": {
+      "appName": "Inventory Management System",
+      "version": "1.0",
+      "designSystem": "Ant Design + Custom Enhancements",
+      "frameworks": "React + Tailwind v4",
+      "lastUpdated": "2025-01-02",
+      "colorModes": ["light", "dark"],
+      "presentationModes": ["old-wireframe", "new-wireframe", "old-hifi", "new-hifi"]
+    },
+    
+    "breakpoints": {
+      "mobile": "375px",
+      "tablet": "768px", 
+      "desktop": "1024px",
+      "wide": "1440px"
+    },
+    
+    "components": [
+      {
+        "name": "Button",
+        "reactFile": "/components/ui/button.tsx",
+        "figmaProperties": {
+          "variants": {
+            "style": ["primary", "secondary", "outline", "ghost"],
+            "size": ["sm", "md", "lg"],
+            "state": ["default", "hover", "pressed", "disabled"],
+            "iconPosition": ["none", "left", "right", "iconOnly"]
+          },
+          "dimensions": {
+            "height": {"sm": "32px", "md": "40px", "lg": "48px"},
+            "minWidth": {"sm": "64px", "md": "80px", "lg": "96px"},
+            "padding": {"sm": "8px 12px", "md": "8px 16px", "lg": "12px 20px"}
+          },
+          "styling": {
+            "borderRadius": "6px",
+            "fontFamily": "Inter",
+            "fontSize": {"sm": "12px", "md": "14px", "lg": "16px"},
+            "fontWeight": "500",
+            "transition": "all 0.2s ease-in-out"
+          },
+          "elevations": {
+            "wireframe": {"default": "0", "hover": "1"},
+            "highFidelity": {"default": "1", "hover": "2"}
+          }
+        }
+      },
+      
+      {
+        "name": "Input",
+        "reactFile": "/components/ui/input.tsx",
+        "figmaProperties": {
+          "variants": {
+            "type": ["text", "number", "date", "search"],
+            "state": ["default", "focus", "error", "disabled"],
+            "size": ["md", "lg"]
+          },
+          "dimensions": {
+            "height": {"md": "40px", "lg": "48px"},
+            "padding": "12px",
+            "minWidth": "200px"
+          },
+          "styling": {
+            "borderRadius": "6px",
+            "borderWidth": "1px",
+            "fontFamily": "Inter",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "1.5"
+          },
+          "states": {
+            "default": {"borderColor": "var(--border)"},
+            "focus": {"borderColor": "var(--primary)", "ringWidth": "2px"},
+            "error": {"borderColor": "var(--destructive)"},
+            "disabled": {"opacity": "0.5", "cursor": "not-allowed"}
+          }
+        }
+      },
+      
+      {
+        "name": "Card",
+        "reactFile": "/components/ui/card.tsx",
+        "figmaProperties": {
+          "variants": {
+            "type": ["default", "stats"],
+            "statsColor": ["yellow", "green", "blue"],
+            "elevation": ["1", "2", "3"],
+            "fidelity": ["wireframe", "highFidelity"]
+          },
+          "dimensions": {
+            "padding": "24px",
+            "borderRadius": "8px",
+            "minHeight": "120px"
+          },
+          "styling": {
+            "backgroundColor": "var(--card)",
+            "border": "1px solid var(--border)"
+          },
+          "highFidelityEnhancements": {
+            "background": {
+              "yellow": "linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)",
+              "green": "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
+              "blue": "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)"
+            },
+            "backdropFilter": "blur(12px)"
+          }
+        }
+      },
+      
+      {
+        "name": "Table",
+        "reactFile": "/components/InventoryTable.tsx",
+        "figmaProperties": {
+          "variants": {
+            "version": ["old", "new"],
+            "rowType": ["header", "data", "empty"],
+            "fidelity": ["wireframe", "highFidelity"]
+          },
+          "dimensions": {
+            "cellPadding": "16px",
+            "rowHeight": {"header": "48px", "data": "56px"},
+            "columnWidths": {
+              "old": ["120px", "160px", "120px", "140px", "100px", "80px"],
+              "new": ["120px", "160px", "140px", "120px", "120px", "140px", "100px", "80px"]
+            }
+          },
+          "styling": {
+            "headerBackground": "var(--muted)",
+            "borderColor": "var(--border)",
+            "hoverBackground": "var(--accent)"
+          },
+          "responsiveBehavior": {
+            "mobile": "Stack cards vertically",
+            "tablet": "Horizontal scroll",
+            "desktop": "Full table layout"
+          }
+        }
+      },
+      
+      {
+        "name": "FormDialog",
+        "reactFile": "/components/InventoryForm.tsx",
+        "figmaProperties": {
+          "variants": {
+            "version": ["old", "new"],
+            "mode": ["create", "edit"],
+            "fidelity": ["wireframe", "highFidelity"]
+          },
+          "dimensions": {
+            "width": "480px",
+            "maxHeight": "80vh",
+            "padding": "24px",
+            "fieldSpacing": "24px"
+          },
+          "fieldConfiguration": {
+            "old": ["date", "category", "value", "responsible", "status"],
+            "new": ["date", "category", "subcategory", "sku", "value", "responsible", "status"]
+          },
+          "styling": {
+            "borderRadius": "8px",
+            "backgroundColor": "var(--card)",
+            "elevation": "3"
+          },
+          "highFidelityEnhancements": {
+            "backdropFilter": "blur(16px)",
+            "background": "var(--card)/95%",
+            "elevation": "4"
+          }
+        }
+      },
+      
+      {
+        "name": "FilterBar",
+        "reactFile": "/components/FilterBar.tsx",
+        "figmaProperties": {
+          "variants": {
+            "version": ["old", "new"],
+            "state": ["collapsed", "expanded"],
+            "fidelity": ["wireframe", "highFidelity"]
+          },
+          "dimensions": {
+            "padding": "16px",
+            "filterSpacing": "8px",
+            "height": {"collapsed": "72px", "expanded": "auto"}
+          },
+          "filterFields": {
+            "old": ["status", "category", "dateFrom", "dateTo", "responsible"],
+            "new": ["status", "category", "subcategory", "sku", "dateFrom", "dateTo", "responsible"]
+          },
+          "responsiveBehavior": {
+            "desktop": "Horizontal layout, inline filters",
+            "mobile": "Collapsible vertical layout"
+          }
+        }
+      },
+      
+      {
+        "name": "StatsCard",
+        "reactFile": "/App.tsx (High-Fidelity Stats)",
+        "figmaProperties": {
+          "variants": {
+            "type": ["pending", "approved", "totalValue"],
+            "size": ["default", "compact"]
+          },
+          "dimensions": {
+            "width": "100%",
+            "height": "120px",
+            "padding": "24px",
+            "iconSize": "48px"
+          },
+          "styling": {
+            "borderRadius": "12px",
+            "backgroundGradients": {
+              "pending": "linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)",
+              "approved": "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
+              "totalValue": "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)"
+            },
+            "iconBackgrounds": {
+              "pending": "rgba(245, 158, 11, 0.2)",
+              "approved": "rgba(34, 197, 94, 0.2)", 
+              "totalValue": "rgba(59, 130, 246, 0.2)"
+            }
+          },
+          "icons": {
+            "pending": "TrendingUp",
+            "approved": "Package",
+            "totalValue": "DollarSign"
+          }
+        }
+      },
+      
+      {
+        "name": "PresentationSelector",
+        "reactFile": "/components/PresentationSelector.tsx",
+        "figmaProperties": {
+          "variants": {
+            "state": ["closed", "open"],
+            "selectedMode": ["oldWireframe", "newWireframe", "oldHifi", "newHifi"]
+          },
+          "dimensions": {
+            "triggerSize": "56px",
+            "popoverWidth": "320px",
+            "position": "bottom-left: 24px"
+          },
+          "styling": {
+            "borderRadius": "16px",
+            "elevation": "3",
+            "backdropFilter": "blur(12px)",
+            "background": "var(--card)/95%"
+          },
+          "modeOptions": [
+            {
+              "key": "oldWireframe",
+              "label": "Old Wireframe",
+              "description": "Legacy system with basic styling",
+              "badge": "Legacy",
+              "icon": "History"
+            },
+            {
+              "key": "newWireframe", 
+              "label": "New Wireframe",
+              "description": "Enhanced system with basic styling",
+              "badge": "Enhanced",
+              "icon": "Sparkles"
+            },
+            {
+              "key": "oldHifi",
+              "label": "Old High-Fidelity",
+              "description": "Legacy system with polished design",
+              "badge": "Legacy Pro",
+              "icon": "History"
+            },
+            {
+              "key": "newHifi",
+              "label": "New High-Fidelity", 
+              "description": "Enhanced system with polished design",
+              "badge": "Enhanced Pro",
+              "icon": "Sparkles"
+            }
+          ]
+        }
+      }
+    ],
+    
+    "layouts": [
+      {
+        "name": "AppLayout",
+        "structure": {
+          "header": {
+            "height": "72px",
+            "padding": "16px",
+            "sticky": true,
+            "zIndex": "10"
+          },
+          "main": {
+            "padding": "24px",
+            "maxWidth": "1200px",
+            "margin": "0 auto"
+          },
+          "sections": [
+            "statsCards (highFidelity only)",
+            "filterBar",
+            "dataTable"
+          ]
+        },
+        "responsiveBreakpoints": {
+          "mobile": {
+            "header": {"padding": "12px"},
+            "main": {"padding": "16px"},
+            "sections": ["mobileStats (in drawer)", "filterBar (collapsible)", "cardList"]
+          },
+          "tablet": {
+            "header": {"padding": "16px"},
+            "main": {"padding": "20px"}
+          },
+          "desktop": {
+            "header": {"padding": "16px"},
+            "main": {"padding": "24px"}
+          }
+        }
+      }
+    ],
+    
+    "userFlows": [
+      {
+        "name": "Add New Record",
+        "steps": [
+          "Dashboard (any mode)",
+          "Click 'New Record' button",
+          "Form Dialog opens",
+          "Fill required fields",
+          "Submit form", 
+          "Return to updated Dashboard"
+        ],
+        "interactions": [
+          "Button click → Dialog overlay",
+          "Form validation → Button state changes",
+          "Submit → Dialog close + table update"
+        ]
+      },
+      {
+        "name": "Filter Records",
+        "steps": [
+          "Dashboard with data",
+          "Interact with filter controls",
+          "View filtered results",
+          "Clear filters (optional)"
+        ],
+        "interactions": [
+          "Dropdown selection → Table update",
+          "Date picker → Results filter",
+          "Clear button → Reset view"
+        ]
+      },
+      {
+        "name": "Presentation Mode Demo",
+        "steps": [
+          "Click Presentation Selector",
+          "View mode options",
+          "Select different mode",
+          "Interface transforms",
+          "Demonstrate features"
+        ],
+        "interactions": [
+          "Floating button → Popover",
+          "Mode selection → Complete UI change",
+          "Maintain user context"
+        ]
+      }
+    ],
+    
+    "designTokens": {
+      "colors": {
+        "light": {
+          "primary": "#1677ff",
+          "success": "#52c41a",
+          "warning": "#faad14", 
+          "error": "#ff4d4f",
+          "text": "#000000d9",
+          "textSecondary": "#00000073",
+          "background": "#ffffff",
+          "card": "#ffffff",
+          "border": "#d9d9d9"
+        },
+        "dark": {
+          "primary": "#1668dc",
+          "success": "#49aa19",
+          "warning": "#d89614",
+          "error": "#dc4446", 
+          "text": "#ffffffd9",
+          "textSecondary": "#ffffff73",
+          "background": "#141414",
+          "card": "#141414",
+          "border": "#434343"
+        }
+      },
+      "typography": {
+        "fontFamily": "Inter",
+        "scale": {
+          "display": "28-38px",
+          "headlineLg": "24-30px",
+          "headlineMd": "20-24px",
+          "titleLg": "18-20px",
+          "titleMd": "16px",
+          "bodyLg": "16px",
+          "bodyMd": "14px",
+          "labelLg": "14px",
+          "labelMd": "12px"
+        },
+        "weights": {
+          "regular": "400",
+          "medium": "500",
+          "semibold": "600"
+        }
+      },
+      "spacing": {
+        "scale": [4, 8, 12, 16, 20, 24, 32, 48, 64],
+        "component": {
+          "cardPadding": "24px",
+          "buttonPadding": "8px 16px", 
+          "inputPadding": "12px",
+          "tableCellPadding": "16px"
+        }
+      },
+      "elevation": {
+        "wireframe": {
+          "level1": "0 1px 2px rgba(0,0,0,0.1)",
+          "level2": "0 2px 4px rgba(0,0,0,0.1)",
+          "level3": "0 4px 8px rgba(0,0,0,0.1)"
+        },
+        "highFidelity": {
+          "level1": "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)",
+          "level2": "0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06)",
+          "level3": "0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)"
+        }
+      }
+    }
+  }
+}
