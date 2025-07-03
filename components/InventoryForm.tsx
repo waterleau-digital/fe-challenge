@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { useForm } from "react-hook-form@7.55.0";
+import { useForm } from "react-hook-form";
 import { DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog";
 import { InventoryRecord } from "../App";
 
