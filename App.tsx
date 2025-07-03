@@ -256,7 +256,7 @@ export default function App() {
                 <Button
                   onClick={handleExportCSV}
                   variant="outline"
-                  className="gap-2 touch-target transition-brand bg-background/50 backdrop-blur-sm hover:bg-background/80 elevation-1 hover:elevation-2 border-border/50 hover:border-primary/30"
+                  className="gap-2 touch-target transition-brand bg-background/50 backdrop-blur-sm hover:bg-background/80 elevation-1 hover:elevation-2 border-border hover:border-primary"
                   aria-label={`Export ${filteredRecords.length} records to CSV`}
                 >
                   <Download className="h-4 w-4" aria-hidden="true" />
