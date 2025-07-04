@@ -1,0 +1,62 @@
+[
+  {
+    "id": "corporate-blue",
+    "name": "InventoryPro",
+    "tagline": "Professional Inventory Management",
+    "description": "Professional, trustworthy, enterprise-ready",
+    "colors": {
+      "primary": "#0052cc",
+      "gradient": "linear-gradient(135deg, #0066ff 0%, #0052cc 100%)"
+    }
+  },
+  {
+    "id": "eco-green",
+    "name": "EcoInventory",
+    "tagline": "Sustainable Inventory Solutions",
+    "description": "Sustainable, growth-focused, modern",
+    "colors": {
+      "primary": "#16a34a",
+      "gradient": "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)"
+    }
+  },
+  {
+    "id": "premium-purple",
+    "name": "ProInventory",
+    "tagline": "Premium Inventory Management",
+    "description": "Luxury, innovative, creative",
+    "colors": {
+      "primary": "#7c3aed",
+      "gradient": "linear-gradient(135deg, #9333ea 0%, #7c3aed 100%)"
+    }
+  },
+  {
+    "id": "energy-orange",
+    "name": "FlowInventory",
+    "tagline": "Dynamic Inventory Control",
+    "description": "Dynamic, energetic, bold",
+    "colors": {
+      "primary": "#ea580c",
+      "gradient": "linear-gradient(135deg, #f97316 0%, #ea580c 100%)"
+    }
+  },
+  {
+    "id": "tech-cyan",
+    "name": "TechInventory",
+    "tagline": "Next-Gen Inventory Platform",
+    "description": "Modern, tech-forward, innovative",
+    "colors": {
+      "primary": "#0891b2",
+      "gradient": "linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)"
+    }
+  },
+  {
+    "id": "classic-red",
+    "name": "PowerInventory",
+    "tagline": "Powerful Inventory Solutions",
+    "description": "Bold, established, powerful",
+    "colors": {
+      "primary": "#dc2626",
+      "gradient": "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)"
+    }
+  }
+]

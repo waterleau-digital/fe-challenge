@@ -1,33 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Label } from './ui/label';
-
-export type DesignSystem = 'material' | 'ant' | 'hig';
+import { apiService, DesignSystem } from '../src/services/api';
 
 interface DesignSystemSelectorProps {
-  value: DesignSystem;
-  onChange: (value: DesignSystem) => void;
+  value: string;
+  onChange: (value: string) => void;
 }
 
-const designSystems = [
-  {
-    id: 'material' as const,
-    name: 'Material Design',
-    description: 'Google\'s Material Design 3'
-  },
-  {
-    id: 'ant' as const,
-    name: 'Ant Design',
-    description: 'Ant Group\'s Design Language'
-  },
-  {
-    id: 'hig' as const,
-    name: 'Human Interface Guidelines',
-    description: 'Apple\'s Design System'
-  }
-];
 
 export function DesignSystemSelector({ value, onChange }: DesignSystemSelectorProps) {
+  const [designSystems, setDesignSystems] = useState<DesignSystem[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const loadDesignSystems = async () => {
+      try {
+        setLoading(true);
+        const data = await apiService.getDesignSystems();
+        setDesignSystems(data);
+      } catch (error) {
+        console.error('Failed to load design systems:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadDesignSystems();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center gap-3">
+        <Label className="text-sm font-medium whitespace-nowrap">Design System:</Label>
+        <div className="w-[200px] h-9 bg-muted/50 rounded-md animate-pulse"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center gap-3">
       <Label htmlFor="design-system-selector" className="text-sm font-medium whitespace-nowrap">

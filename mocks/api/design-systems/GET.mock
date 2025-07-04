@@ -1,0 +1,21 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Access-Control-Allow-Origin: *
+
+[
+  {
+    "id": "material",
+    "name": "Material Design",
+    "description": "Google's Material Design 3"
+  },
+  {
+    "id": "ant",
+    "name": "Ant Design",
+    "description": "Ant Group's Design Language"
+  },
+  {
+    "id": "hig",
+    "name": "Human Interface Guidelines",
+    "description": "Apple's Design System"
+  }
+]

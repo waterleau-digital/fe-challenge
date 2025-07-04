@@ -10,84 +10,32 @@ import {
   DialogTrigger,
 } from './ui/dialog';
 import { Palette, Check } from 'lucide-react';
+import { apiService, Theme } from '../src/services/api';
 
-interface Theme {
-  id: string;
-  name: string;
-  tagline: string;
-  description: string;
-  colors: {
-    primary: string;
-    gradient: string;
-  };
-}
 
-const themes: Theme[] = [
-  {
-    id: 'corporate-blue',
-    name: 'InventoryPro',
-    tagline: 'Professional Inventory Management',
-    description: 'Professional, trustworthy, enterprise-ready',
-    colors: {
-      primary: '#0052cc',
-      gradient: 'linear-gradient(135deg, #0066ff 0%, #0052cc 100%)',
-    },
-  },
-  {
-    id: 'eco-green',
-    name: 'EcoInventory',
-    tagline: 'Sustainable Inventory Solutions',
-    description: 'Sustainable, growth-focused, modern',
-    colors: {
-      primary: '#16a34a',
-      gradient: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
-    },
-  },
-  {
-    id: 'premium-purple',
-    name: 'ProInventory',
-    tagline: 'Premium Inventory Management',
-    description: 'Luxury, innovative, creative',
-    colors: {
-      primary: '#7c3aed',
-      gradient: 'linear-gradient(135deg, #9333ea 0%, #7c3aed 100%)',
-    },
-  },
-  {
-    id: 'energy-orange',
-    name: 'FlowInventory',
-    tagline: 'Dynamic Inventory Control',
-    description: 'Dynamic, energetic, bold',
-    colors: {
-      primary: '#ea580c',
-      gradient: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)',
-    },
-  },
-  {
-    id: 'tech-cyan',
-    name: 'TechInventory',
-    tagline: 'Next-Gen Inventory Platform',
-    description: 'Modern, tech-forward, innovative',
-    colors: {
-      primary: '#0891b2',
-      gradient: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
-    },
-  },
-  {
-    id: 'classic-red',
-    name: 'PowerInventory',
-    tagline: 'Powerful Inventory Solutions',
-    description: 'Bold, established, powerful',
-    colors: {
-      primary: '#dc2626',
-      gradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
-    },
-  },
-];
 
 export function ThemeSelector() {
   const [currentTheme, setCurrentTheme] = useState('corporate-blue');
+  const [themes, setThemes] = useState<Theme[]>([]);
+  const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  // Load themes from API
+  useEffect(() => {
+    const loadThemes = async () => {
+      try {
+        setLoading(true);
+        const themesData = await apiService.getThemes();
+        setThemes(themesData);
+      } catch (error) {
+        console.error('Failed to load themes:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadThemes();
+  }, []);
 
   // Initialize theme on component mount
   useEffect(() => {
@@ -168,7 +116,13 @@ export function ThemeSelector() {
         </DialogHeader>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-          {themes.map((theme) => (
+          {loading ? (
+            <div className="col-span-full text-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+              <p className="text-sm text-muted-foreground mt-2">Loading themes...</p>
+            </div>
+          ) : (
+            themes.map((theme) => (
             <Card
               key={theme.id}
               className={`cursor-pointer transition-brand border-2 group hover:scale-[1.02] ${
@@ -214,7 +168,8 @@ export function ThemeSelector() {
                 </div>
               </CardContent>
             </Card>
-          ))}
+          ))
+          )}
         </div>
 
         {/* Current Theme Summary */}

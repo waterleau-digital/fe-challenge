@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { InventoryTable } from "./components/InventoryTable";
 import { InventoryForm } from "./components/InventoryForm";
 import { FilterBar } from "./components/FilterBar";
@@ -23,91 +23,10 @@ import {
   SheetContent,
   SheetTrigger,
 } from "./components/ui/sheet";
+import { apiService, InventoryRecord } from "./src/services/api";
 
-export interface InventoryRecord {
-  id: string;
-  date: string;
-  category: string;
-  value: number;
-  responsible: string;
-  status: "pending" | "approved" | "rejected";
-}
 
-const categories = [
-  "Raw Materials",
-  "Finished Products", 
-  "Equipment",
-  "Packaging",
-  "Tools",
-  "Consumables"
-];
 
-const initialRecords: InventoryRecord[] = [
-  {
-    id: "1",
-    date: "2025-06-27",
-    category: "Raw Materials",
-    value: 15000,
-    responsible: "John Smith",
-    status: "approved",
-  },
-  {
-    id: "2",
-    date: "2025-06-26",
-    category: "Finished Products",
-    value: 8500,
-    responsible: "Maria Johnson",
-    status: "pending",
-  },
-  {
-    id: "3",
-    date: "2025-06-25",
-    category: "Equipment",
-    value: 32000,
-    responsible: "Carlos Rodriguez",
-    status: "approved",
-  },
-  {
-    id: "4",
-    date: "2025-06-24",
-    category: "Raw Materials",
-    value: 12300,
-    responsible: "Anna Williams",
-    status: "pending",
-  },
-  {
-    id: "5",
-    date: "2025-06-23",
-    category: "Packaging",
-    value: 2800,
-    responsible: "Peter Brown",
-    status: "approved",
-  },
-  {
-    id: "6",
-    date: "2025-06-22",
-    category: "Tools",
-    value: 4200,
-    responsible: "Linda Davis",
-    status: "approved",
-  },
-  {
-    id: "7",
-    date: "2025-06-21",
-    category: "Consumables",
-    value: 1800,
-    responsible: "Robert Wilson",
-    status: "pending",
-  },
-  {
-    id: "8",
-    date: "2025-06-20",
-    category: "Finished Products",
-    value: 25000,
-    responsible: "Maria Johnson",
-    status: "approved",
-  },
-];
 
 const defaultFilters = {
   category: "all",
@@ -118,7 +37,10 @@ const defaultFilters = {
 };
 
 export default function App() {
-  const [records, setRecords] = useState<InventoryRecord[]>(initialRecords);
+  const [records, setRecords] = useState<InventoryRecord[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingRecord, setEditingRecord] = useState<InventoryRecord | null>(null);
   
@@ -145,6 +67,27 @@ export default function App() {
     const total = filteredRecords.reduce((sum, record) => sum + record.value, 0);
     return { pending, approved, total };
   }, [filteredRecords]);
+
+  // Load data from API
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const [recordsData, categoriesData] = await Promise.all([
+          apiService.getInventoryRecords(),
+          apiService.getCategories()
+        ]);
+        setRecords(recordsData);
+        setCategories(categoriesData);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load data');
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadData();
+  }, []);
 
   // Check if there are pending changes
   const hasPendingChanges = JSON.stringify(pendingFilters) !== JSON.stringify(appliedFilters);
@@ -375,8 +318,34 @@ export default function App() {
         role="main"
         aria-label="Inventory management interface"
       >
-        <section aria-label="Statistics overview">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {loading && (
+          <div className="flex items-center justify-center py-8">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+              <p className="text-sm text-muted-foreground mt-2">Loading data...</p>
+            </div>
+          </div>
+        )}
+        
+        {error && (
+          <div className="bg-destructive/10 border border-destructive/20 text-destructive rounded-lg p-4 text-center">
+            <p className="font-medium">Error loading data</p>
+            <p className="text-sm mt-1">{error}</p>
+            <Button 
+              onClick={() => window.location.reload()} 
+              variant="outline" 
+              size="sm" 
+              className="mt-3"
+            >
+              Retry
+            </Button>
+          </div>
+        )}
+        
+        {!loading && !error && (
+          <>
+            <section aria-label="Statistics overview">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card className="transition-brand bg-warning-background border-warning-border elevation-1 hover:elevation-2 hover:border-warning-border/80">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
@@ -469,6 +438,8 @@ export default function App() {
             </Card>
           </div>
         </section>
+          </>
+        )}
       </main>
 
       <div className="fixed bottom-6 right-6 sm:hidden no-print">

@@ -1,0 +1,70 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Access-Control-Allow-Origin: *
+
+[
+  {
+    "id": "1",
+    "date": "2025-06-27",
+    "category": "Raw Materials",
+    "value": 15000,
+    "responsible": "John Smith",
+    "status": "approved"
+  },
+  {
+    "id": "2",
+    "date": "2025-06-26",
+    "category": "Finished Products",
+    "value": 8500,
+    "responsible": "Maria Johnson",
+    "status": "pending"
+  },
+  {
+    "id": "3",
+    "date": "2025-06-25",
+    "category": "Equipment",
+    "value": 32000,
+    "responsible": "Carlos Rodriguez",
+    "status": "approved"
+  },
+  {
+    "id": "4",
+    "date": "2025-06-24",
+    "category": "Raw Materials",
+    "value": 12300,
+    "responsible": "Anna Williams",
+    "status": "pending"
+  },
+  {
+    "id": "5",
+    "date": "2025-06-23",
+    "category": "Packaging",
+    "value": 2800,
+    "responsible": "Peter Brown",
+    "status": "approved"
+  },
+  {
+    "id": "6",
+    "date": "2025-06-22",
+    "category": "Tools",
+    "value": 4200,
+    "responsible": "Linda Davis",
+    "status": "approved"
+  },
+  {
+    "id": "7",
+    "date": "2025-06-21",
+    "category": "Consumables",
+    "value": 1800,
+    "responsible": "Robert Wilson",
+    "status": "pending"
+  },
+  {
+    "id": "8",
+    "date": "2025-06-20",
+    "category": "Finished Products",
+    "value": 25000,
+    "responsible": "Maria Johnson",
+    "status": "approved"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "version": "old",
+    "fidelity": "high-fidelity",
+    "label": "As IS (High-Fidelity)",
+    "description": "Current system with polished design",
+    "icon": "Palette",
+    "badge": "Current",
+    "badgeVariant": "secondary"
+  },
+  {
+    "version": "new",
+    "fidelity": "wireframe",
+    "label": "New (Wireframe)",
+    "description": "Enhanced system with basic styling",
+    "icon": "Sparkles",
+    "badge": "Enhanced",
+    "badgeVariant": "default"
+  }
+]
