@@ -25,7 +25,7 @@ import {
   ChevronDown,
   MoreHorizontal,
 } from "lucide-react";
-import { InventoryRecord } from "../App";
+import { InventoryRecord } from "../src/services/api";
 
 interface InventoryTableProps {
   records: InventoryRecord[];

@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -11,7 +10,7 @@ import {
 } from "./ui/select";
 import { useForm } from "react-hook-form";
 import { DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog";
-import { InventoryRecord } from "../App";
+import { InventoryRecord } from "../src/services/api";
 
 interface InventoryFormProps {
   record?: InventoryRecord | null;

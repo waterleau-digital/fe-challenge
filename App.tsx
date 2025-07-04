@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { InventoryTable } from "./components/InventoryTable";
 import { InventoryForm } from "./components/InventoryForm";
 import { FilterBar } from "./components/FilterBar";
@@ -219,7 +219,13 @@ export default function App() {
                   <DialogContent className="max-w-md transition-brand elevation-4 bg-card/95 backdrop-blur-lg border-border/50">
                     <InventoryForm
                       record={editingRecord}
-                      onSubmit={editingRecord ? handleEditRecord : handleAddRecord}
+                      onSubmit={(data) => {
+                        if ('id' in data) {
+                          handleEditRecord(data);
+                        } else {
+                          handleAddRecord(data);
+                        }
+                      }}
                       onCancel={closeForm}
                       categories={categories}
                     />
