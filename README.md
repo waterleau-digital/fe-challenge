@@ -1,10 +1,6 @@
 # InventoryPro - Frontend Challenge Base
 
-A professional inventory management system built with React and Tailwind CSS. This serves as the base application for frontend technical interviews and coding challenges.
-
-## Overview
-
-This is an internal inventory management tool designed to help organizations track and manage their inventory records. The application provides a clean, professional interface for viewing, filtering, creating, and managing inventory items.
+A professional inventory management system built with React and Tailwind CSS. This tool is internal and helps our organization manage inventory records efficiently. It features a clean, modern interface with advanced filtering, record management, and data export capabilities.
 
 ## Features
 
@@ -118,13 +114,9 @@ This application supports two dataset modes:
 
 ### 🟢 Small Dataset (Default)
 - **8 inventory records**
-- **Fast performance** for normal development
-- **Good for**: Basic feature development, UI work, general testing
 
-### 🔴 Large Dataset (Performance Testing)
+### 🔴 Large Dataset 
 - **10,000+ inventory records** (~1.6MB)
-- **Intentional performance issues** for optimization challenges
-- **Good for**: Performance testing, optimization exercises, technical interviews
 
 ## Switching Between Datasets
 
@@ -138,39 +130,6 @@ npm run dataset:small
 # Generate a fresh large dataset (optional)
 npm run dataset:generate
 ```
-
-## Performance Challenge
-
-⚠️ **When using the large dataset, the application will have intentional performance issues for educational purposes.**
-
-### Expected Performance Issues
-
-1. **Slow Initial Load**: Large JSON payload (~1.6MB) takes time to download and parse
-2. **Heavy DOM Rendering**: Rendering 10k+ table rows will freeze the browser
-3. **Laggy Filtering**: Real-time search across large dataset causes input lag
-4. **Slow Sorting**: Sorting large arrays blocks the main thread
-5. **Memory Consumption**: High memory usage from rendering all records
-6. **Poor Scroll Performance**: Scrolling through thousands of rows is janky
-
-### Optimization Opportunities
-
-Candidates should implement solutions such as:
-
-- **Virtualization**: Only render visible rows (react-window, react-virtualized)
-- **Pagination**: Server-side or client-side pagination
-- **Debounced Search**: Delay filtering until user stops typing
-- **Memoization**: Use React.memo, useMemo, useCallback
-- **Web Workers**: Move heavy computations off main thread
-- **Lazy Loading**: Load data incrementally
-- **Code Splitting**: Split bundle to improve initial load time
-
-### Performance Metrics to Monitor
-
-- **Time to Interactive (TTI)**
-- **First Contentful Paint (FCP)**
-- **Memory usage during scrolling**
-- **Input responsiveness during filtering**
-- **Bundle size analysis**
 
 ## Development Notes
 
