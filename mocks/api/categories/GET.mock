@@ -8,5 +8,14 @@ Access-Control-Allow-Origin: *
   "Equipment",
   "Packaging",
   "Tools",
-  "Consumables"
+  "Consumables",
+  "Electronics",
+  "Chemicals",
+  "Textiles",
+  "Automotive Parts",
+  "Building Materials",
+  "Office Supplies",
+  "Safety Equipment",
+  "Maintenance Items",
+  "Food & Beverages"
 ]

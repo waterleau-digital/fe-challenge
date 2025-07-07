@@ -50,28 +50,41 @@ This is an internal inventory management tool designed to help organizations tra
 
 ### Available Scripts
 
+#### Development
 - `npm run dev` - Start frontend development server only
 - `npm run dev:with-mock` - Start both frontend and mock API server
 - `npm run mock-server` - Start mock API server only  
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
 
+#### Dataset Management
+- `npm run dataset:small` - Switch to small dataset (8 records, default)
+- `npm run dataset:large` - Switch to large dataset (10,000 records)
+- `npm run dataset:generate` - Generate a new large dataset
+
 ## Application Structure
 
 ```
-├── App.tsx                    # Main application component
+├── App.tsx                          # Main application component
 ├── components/
-│   ├── FilterBar.tsx         # Advanced filtering interface
-│   ├── InventoryForm.tsx     # Create/edit form with validation
-│   ├── InventoryTable.tsx    # Sortable data table
-│   └── ui/                   # Essential UI components
+│   ├── FilterBar.tsx               # Advanced filtering interface
+│   ├── InventoryForm.tsx           # Create/edit form with validation
+│   ├── InventoryTable.tsx          # Sortable data table
+│   └── ui/                         # Essential UI components
 ├── src/services/
-│   └── api.ts                # API service layer
-├── mocks/                    # Mock API responses
-├── data/                     # Sample data files
-├── mockserver.js             # Development mock server
+│   └── api.ts                      # API service layer
+├── mocks/api/inventory-records/
+│   ├── GET.mock                    # Current dataset (8 or 10k records)
+│   ├── GET-small.mock              # Small dataset backup (8 records)
+│   └── GET-large.mock              # Large dataset (10,000 records)
+├── scripts/
+│   ├── generate-large-dataset.js   # Generate new large dataset
+│   ├── switch-to-large-dataset.js  # Switch to performance testing mode
+│   └── switch-to-small-dataset.js  # Switch to normal development mode
+├── mockserver.js                   # Development mock server
+├── performance-test.md             # Performance testing guide
 └── styles/
-    └── globals.css           # Complete design system
+    └── globals.css                 # Complete design system
 ```
 
 ## Usage Guide
@@ -99,12 +112,73 @@ The mock server provides the following endpoints:
 - `GET /api/design-systems` - Get design system options
 - `GET /api/presentation-modes` - Get presentation mode options
 
+## Dataset Versions
+
+This application supports two dataset modes:
+
+### 🟢 Small Dataset (Default)
+- **8 inventory records**
+- **Fast performance** for normal development
+- **Good for**: Basic feature development, UI work, general testing
+
+### 🔴 Large Dataset (Performance Testing)
+- **10,000+ inventory records** (~1.6MB)
+- **Intentional performance issues** for optimization challenges
+- **Good for**: Performance testing, optimization exercises, technical interviews
+
+## Switching Between Datasets
+
+```bash
+# Switch to large dataset for performance testing
+npm run dataset:large
+
+# Switch back to small dataset for normal development  
+npm run dataset:small
+
+# Generate a fresh large dataset (optional)
+npm run dataset:generate
+```
+
+## Performance Challenge
+
+⚠️ **When using the large dataset, the application will have intentional performance issues for educational purposes.**
+
+### Expected Performance Issues
+
+1. **Slow Initial Load**: Large JSON payload (~1.6MB) takes time to download and parse
+2. **Heavy DOM Rendering**: Rendering 10k+ table rows will freeze the browser
+3. **Laggy Filtering**: Real-time search across large dataset causes input lag
+4. **Slow Sorting**: Sorting large arrays blocks the main thread
+5. **Memory Consumption**: High memory usage from rendering all records
+6. **Poor Scroll Performance**: Scrolling through thousands of rows is janky
+
+### Optimization Opportunities
+
+Candidates should implement solutions such as:
+
+- **Virtualization**: Only render visible rows (react-window, react-virtualized)
+- **Pagination**: Server-side or client-side pagination
+- **Debounced Search**: Delay filtering until user stops typing
+- **Memoization**: Use React.memo, useMemo, useCallback
+- **Web Workers**: Move heavy computations off main thread
+- **Lazy Loading**: Load data incrementally
+- **Code Splitting**: Split bundle to improve initial load time
+
+### Performance Metrics to Monitor
+
+- **Time to Interactive (TTI)**
+- **First Contentful Paint (FCP)**
+- **Memory usage during scrolling**
+- **Input responsiveness during filtering**
+- **Bundle size analysis**
+
 ## Development Notes
 
 - The application uses a mock server for development that serves static JSON responses
 - All styling is handled through Tailwind CSS with a custom design system
 - Form validation is implemented using React Hook Form
 - The application is fully responsive and accessible
+- Use browser DevTools Performance tab to identify bottlenecks
 
 ## License
 
