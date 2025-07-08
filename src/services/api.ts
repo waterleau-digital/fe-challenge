@@ -37,9 +37,19 @@ export interface PresentationMode {
 }
 
 class ApiService {
-  private async fetchData<T>(endpoint: string): Promise<T> {
+  private async fetchData<T>(endpoint: string, params?: Record<string, string | number>): Promise<T> {
     try {
-      const response = await fetch(`${API_BASE_URL}${endpoint}`);
+      let url = `${API_BASE_URL}${endpoint}`;
+      
+      if (params) {
+        const searchParams = new URLSearchParams();
+        Object.entries(params).forEach(([key, value]) => {
+          searchParams.append(key, value.toString());
+        });
+        url += `?${searchParams.toString()}`;
+      }
+      
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -50,8 +60,12 @@ class ApiService {
     }
   }
 
-  async getInventoryRecords(): Promise<InventoryRecord[]> {
-    return this.fetchData<InventoryRecord[]>('/inventory-records');
+  async getInventoryRecords(offset?: number, limit?: number): Promise<InventoryRecord[]> {
+    const params: Record<string, number> = {};
+    if (offset !== undefined) params.offset = offset;
+    if (limit !== undefined) params.limit = limit;
+    
+    return this.fetchData<InventoryRecord[]>('/inventory-records', Object.keys(params).length > 0 ? params : undefined);
   }
 
   async getCategories(): Promise<string[]> {

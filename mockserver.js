@@ -37,21 +37,47 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  const url = req.url;
+  const urlParts = req.url.split('?');
+  const path = urlParts[0];
+  const queryString = urlParts[1];
   
-  if (url === '/api/inventory-records') {
+  // Parse query parameters
+  const queryParams = {};
+  if (queryString) {
+    queryString.split('&').forEach(param => {
+      const [key, value] = param.split('=');
+      queryParams[decodeURIComponent(key)] = decodeURIComponent(value);
+    });
+  }
+  
+  if (path === '/api/inventory-records') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(mockData['inventory-records']));
-  } else if (url === '/api/categories') {
+    
+    let data = mockData['inventory-records'];
+    
+    // Handle pagination
+    if (queryParams.offset || queryParams.limit) {
+      const offset = parseInt(queryParams.offset) || 0;
+      const limit = parseInt(queryParams.limit) || data.length;
+      
+      // Ensure offset is not negative
+      const safeOffset = Math.max(0, offset);
+      
+      // Slice the data for pagination
+      data = data.slice(safeOffset, safeOffset + limit);
+    }
+    
+    res.end(JSON.stringify(data));
+  } else if (path === '/api/categories') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(mockData['categories']));
-  } else if (url === '/api/themes') {
+  } else if (path === '/api/themes') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(mockData['themes']));
-  } else if (url === '/api/design-systems') {
+  } else if (path === '/api/design-systems') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(mockData['design-systems']));
-  } else if (url === '/api/presentation-modes') {
+  } else if (path === '/api/presentation-modes') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(mockData['presentation-modes']));
   } else {
