@@ -139,6 +139,21 @@ npm run dataset:generate
 - The application is fully responsive and accessible
 - Use browser DevTools Performance tab to identify bottlenecks
 
+## Before the interview
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Start the development environment:**
+   ```bash
+   npm run dev:with-mock
+   ```
+   This starts both the frontend (http://localhost:3000) and mock API server (http://localhost:3001).
+
+3. **Explore the application** with the default small dataset (8 records).
+
 ## License
 
 MIT License
